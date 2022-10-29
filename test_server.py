@@ -1,5 +1,6 @@
 import pyodbc
 
+
 server = 'localhost'
 database = 'Test'
 username = 'sa'
@@ -11,4 +12,3 @@ cursor.execute("SELECT * FROM sys.database_principals " )
 for row in cursor.fetchall():
     print(row)
 
-cursor
