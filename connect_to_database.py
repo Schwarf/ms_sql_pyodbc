@@ -1,10 +1,12 @@
 import argparse
 import sys
 
+import alembic.config
+import alembic.command
 import pyodbc
 
 
-def get_connection(password_file: str) -> pyodbc.Connection:
+def get_database_connection(password_file: str) -> pyodbc.Connection:
     driver = "ODBC Driver 17 for SQL Server"
     server = 'localhost'
     database = 'Test'
@@ -16,6 +18,11 @@ def get_connection(password_file: str) -> pyodbc.Connection:
     connection = pyodbc.connect(f"DRIVER={driver};SERVER={server};DATABASE={database};UID={username};PWD={password}")
     return connection
 
+def upgrade_database_scheme(sqlalchemy_url: str) -> None:
+    alembic_config = alembic.config.Config("alembic.ini")
+    alembic_config.set_main_option("sqlalchemy.url", sqlalchemy_url)
+    alembic.command.upgrade(config=alembic_config, revision="head")
+
 
 def main() -> None:
     argument_parser = argparse.ArgumentParser()
@@ -26,7 +33,7 @@ def main() -> None:
         print("Arguments are not valid")
         sys.exit()
 
-    connection = get_connection(arguments.password_file)
+    connection = get_database_connection(arguments.password_file)
     cursor = connection.cursor()
     cursor.execute("SELECT * FROM sys.database_principals ")
     for row in cursor.fetchall():
