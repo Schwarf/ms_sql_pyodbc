@@ -1,7 +1,7 @@
-from sqlalchemy import Column, ForeignKey, Integer, String
+from sqlalchemy import Column, ForeignKey, Integer, String, Table
 
-from basics import InsertionDateTime
-from scheme_definitions import SchemeDefinition
+from database_model.basic_scheme_definitions import InsertionDateTime
+from database_model.scheme_definitions import SchemeDefinition, metadata
 
 
 class RootWebsites(SchemeDefinition, InsertionDateTime):
@@ -21,8 +21,7 @@ class VisitedWebsites(SchemeDefinition, InsertionDateTime):
     url = Column(String(1000), nullable=False)
 
 
-class WebsiteMetadata(SchemeDefinition, InsertionDateTime):
-    __tablename__ = "WebsiteMetadata"
-    website_id = Column(ForeignKey("VisitedWebsites.internal_id"))
-    title = Column(String(1000), nullable=False)
-    contained_urls = Column(String())
+WebsiteMetadata = Table("WebsiteMetadata", metadata,
+    Column('website_id', ForeignKey("VisitedWebsites.internal_id")),
+    Column('title', String(1000), nullable=False),
+    Column('contained_urls', String()))
