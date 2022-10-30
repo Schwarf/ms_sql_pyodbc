@@ -37,6 +37,7 @@ def set_sql_alchemy_env_variable(password_file: str) -> None:
     url = get_sql_alchemy_url(password_file)
     sqlalchemy_env_variable = "SQLALCHEMY_URL"
     os.environ[sqlalchemy_env_variable] = url
+    print(os.environ.get(sqlalchemy_env_variable))
 
 
 def get_database_connection(password_file: str) -> pyodbc.Connection:
