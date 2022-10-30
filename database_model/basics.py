@@ -10,4 +10,4 @@ naming_convention = {
 
 
 class InsertionDateTime:
-    time_added = Column(DateTime, server_default=func.now(), nullable=False)
+    insertion_time = Column(DateTime, server_default=func.now(), nullable=False)
