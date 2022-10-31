@@ -6,7 +6,6 @@ from database.database_model.scheme_definitions import SchemeDefinition, metadat
 
 class VisitedWebsites(SchemeDefinition, InsertionDateTime):
     __tablename__ = "VisitedWebsites"
-
     internal_id = Column(Integer, primary_key=True)
     url_hash = Column(Integer, nullable=False, index=True, unique=True)
     url = Column(String(1000), nullable=False)

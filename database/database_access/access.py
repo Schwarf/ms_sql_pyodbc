@@ -4,7 +4,7 @@ import pyodbc
 def get_pyodbc_connection_string(password_file: str) -> str:
     driver = "ODBC Driver 17 for SQL Server"
     server = 'localhost'
-    database = 'Test'
+    database = 'crawler_db'
     with open(password_file, "r") as file:
         lines = file.read().splitlines()
         username = lines[0]
