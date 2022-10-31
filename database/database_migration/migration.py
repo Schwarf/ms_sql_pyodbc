@@ -2,6 +2,7 @@ import os
 import alembic.command
 import alembic.config
 
+
 # TODO This function only updates the head, but does not autogenerate the revision
 def upgrade_database_scheme(password_file: str) -> None:
     alembic_config = alembic.config.Config("alembic.ini")

@@ -5,8 +5,6 @@ from sqlalchemy import pool
 import os
 from alembic import context
 
-
-from database_model import scheme as InitialScheme
 from database_model.scheme_definitions import SchemeDefinition
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.

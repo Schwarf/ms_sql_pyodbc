@@ -1,7 +1,7 @@
 from sqlalchemy import Column, ForeignKey, Integer, String, Table
 
-from database_model.basic_scheme_definitions import InsertionDateTime
-from database_model.scheme_definitions import SchemeDefinition, metadata
+from database.database_model.basic_scheme_definitions import InsertionDateTime
+from database.database_model.scheme_definitions import SchemeDefinition, metadata
 
 
 class RootWebsites(SchemeDefinition, InsertionDateTime):
