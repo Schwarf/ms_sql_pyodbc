@@ -1,3 +1,5 @@
+from abc import ABC
+
 from scrapy.spiders import CrawlSpider, Rule
 from scrapy.linkextractors import LinkExtractor
 from bookscraper.items import BookItem
@@ -11,11 +13,13 @@ class BookScraper(CrawlSpider):
              Rule(LinkExtractor(restrict_css=".product_pod > h3 > a"), callback="parse_book")
              )
 
-    def parse_book(self, response):
+    def parse(self, response):
         book_item = BookItem()
         book_item["image_url"] = response.urljoin(response.css(".item.active > img::attr(src)").get())
         book_item["title"] = response.css(".col-sm-6.product_main > h1 ::text").get()
         book_item["price"] = response.css(".price_color::text").get()
         book_item["upc"] = response.css(".table.table-striped > tr:nth-child(1) > td::text").get()
         book_item["url"] = response.url
+        print(response)
+        x=1
         return book_item
