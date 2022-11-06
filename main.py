@@ -17,6 +17,10 @@ def main() -> None:
     for row in cursor.fetchall():
         print(row)
 
+    string = "In stock (19 available)"
+    splits = string.split('(')
+    number_of_copies = int(''.join((filter(str.isdigit, string))))
+    print(splits," ",  number_of_copies)
 
 if __name__ == "__main__":
     main()

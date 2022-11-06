@@ -6,7 +6,10 @@
 
 # useful for handling different item types with a single interface
 import json
+
 from itemadapter import ItemAdapter
+
+# from database.database_access.access import get_database_connection
 
 
 class BookscraperPipeline:
@@ -20,3 +23,18 @@ class BookscraperPipeline:
         line = json.dumps(ItemAdapter(item).asdict()) + "\n"
         self._json_file.write(line)
         return item
+
+"""
+class SQLServerPipeline:
+    def open_spider(self, spider):
+        self._database_connection = get_database_connection(
+            password_file='/home/andreas/Documents/database_access/access.txt')
+        self._cursor = self._database_connection.cursor()
+
+    def process_item(self, item, spider):
+        pass
+
+    def close_spider(self, spider):
+        self._cursor.commit()
+        self._database_connection.close()
+"""

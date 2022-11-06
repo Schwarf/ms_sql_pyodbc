@@ -13,3 +13,4 @@ class BookItem(Item):
     image_url = Field()
     url = Field()
     availability = Field()
+    number_of_copies = Field()
