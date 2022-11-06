@@ -9,7 +9,7 @@ import json
 
 from itemadapter import ItemAdapter
 
-# from database.database_access.access import get_database_connection
+#from database.database_access.access import get_database_connection
 
 
 class BookscraperPipeline:
@@ -32,7 +32,16 @@ class SQLServerPipeline:
         self._cursor = self._database_connection.cursor()
 
     def process_item(self, item, spider):
-        pass
+        sql_statement = f"SET NOCOUNT ON"\
+                        f"INSERT INTO books (title, price, upc, availability, number_of_copies, url, image_url)" \
+                        f"VALUES (?, ?, ?, ?, ?, ?, ?)"
+        self._cursor.execute(sql_statement, (item['title'],
+                                             item['price'],
+                                             item['upc'],
+                                             item['availability'],
+                                             item['number_of_copies'],
+                                             item['url'],
+                                             item['image_url']))
 
     def close_spider(self, spider):
         self._cursor.commit()
