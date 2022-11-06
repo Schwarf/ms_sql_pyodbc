@@ -12,3 +12,4 @@ class BookItem(Item):
     upc = Field()
     image_url = Field()
     url = Field()
+    availability = Field()
