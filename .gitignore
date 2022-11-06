@@ -1,7 +1,7 @@
 # Byte-compiled / optimized / DLL files
 .idea/
 product_scraper/
-
+*.html
 
 __pycache__/
 *.py[cod]
