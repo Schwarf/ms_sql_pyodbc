@@ -2,6 +2,7 @@
 .idea/
 product_scraper/
 *.html
+*jsonl
 
 __pycache__/
 *.py[cod]
