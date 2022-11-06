@@ -10,4 +10,5 @@ from itemadapter import ItemAdapter
 
 class TutorialPipeline:
     def process_item(self, item, spider):
+
         return item
