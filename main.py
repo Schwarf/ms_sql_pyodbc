@@ -5,7 +5,7 @@ import scrapy
 from scrapy.crawler import CrawlerProcess
 
 from database_access.access import get_database_connection
-from scrapy_crawler.bookscraper.bookscraper.pipelines import BookscraperPipeline
+from pipelines.bookscraper_pipelines import BookscraperPipeline
 from scrapy_crawler.bookscraper.bookscraper.spiders.bookscraper import BookScraper
 
 
@@ -28,7 +28,8 @@ def main2() -> None:
     spider = BookScraper()
     #    scrapy.crawler.Crawler._create_engine = _create_engine
     settings ={}
-    settings['ITEM_PIPELINES'] = {'scrapy_crawler.bookscraper.bookscraper.pipelines.BookscraperPipeline': 300, }
+    settings['ITEM_PIPELINES'] = {'scrapy_crawler.pipelines.bookscraper_pipelines.BookscraperPipeline': 300,
+                                  'scrapy_crawler.pipelines.bookscraper_pipelines.SQLServerPipeline': 300, }
     process = CrawlerProcess(settings)
     #    settings = get_project_settings()
     #    crawler = Crawler(settings)
