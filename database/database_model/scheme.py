@@ -17,7 +17,7 @@ class VisitedWebsites(SchemeDefinition, InsertionDateTime):
 class TestBooks(SchemeDefinition, InsertionDateTime):
     __tablename__ = "books"
     book_id = Column(Integer, primary_key=True)
-    title = Column(String(100), nullable=False)
+    title = Column(String(200), nullable=False)
     price = Column(String(10), nullable=False)
     upc = Column(String(20), nullable=False)
     availability = Column(String(20), nullable=False)

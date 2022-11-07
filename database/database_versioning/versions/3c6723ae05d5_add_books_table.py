@@ -1,8 +1,8 @@
 """Add books table.
 
-Revision ID: 4d613912bd8c
+Revision ID: 3c6723ae05d5
 Revises: d433a433d29a
-Create Date: 2022-11-06 18:14:36.532685
+Create Date: 2022-11-07 19:49:40.028032
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '4d613912bd8c'
+revision = '3c6723ae05d5'
 down_revision = 'd433a433d29a'
 branch_labels = None
 depends_on = None
@@ -21,7 +21,7 @@ def upgrade() -> None:
     op.create_table('books',
     sa.Column('insertion_time', sa.DateTime(), server_default=sa.text('CURRENT_TIMESTAMP'), nullable=False),
     sa.Column('book_id', sa.Integer(), nullable=False),
-    sa.Column('title', sa.String(length=100), nullable=False),
+    sa.Column('title', sa.String(length=200), nullable=False),
     sa.Column('price', sa.String(length=10), nullable=False),
     sa.Column('upc', sa.String(length=20), nullable=False),
     sa.Column('availability', sa.String(length=20), nullable=False),
