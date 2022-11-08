@@ -5,8 +5,9 @@ import scrapy
 from scrapy.crawler import CrawlerProcess
 
 from database_access.access import get_database_connection
-from pipelines.bookscraper_pipelines import BookscraperPipeline
-from scrapy_crawler.bookscraper.bookscraper.spiders.bookscraper import BookScraper
+from scrapy_crawler.pipelines.bookscraper_pipelines import BookscraperPipeline
+from scrapy_crawler.spiders.bookscraper import BookScraper
+
 
 
 def _create_engine(self):
@@ -25,6 +26,14 @@ ITEM_PIPELINES = {
 
 
 def main2() -> None:
+    argument_parser = argparse.ArgumentParser()
+    argument_parser.add_argument("--password_file", required=True)
+    try:
+        arguments = argument_parser.parse_args()
+    except ValueError as error:
+        print("Arguments are not valid")
+        sys.exit()
+
     spider = BookScraper()
     #    scrapy.crawler.Crawler._create_engine = _create_engine
     settings ={}
@@ -36,6 +45,14 @@ def main2() -> None:
 
     process.crawl(BookScraper)
     process.start()
+    connection = get_database_connection(arguments.password_file)
+    cursor = connection.cursor()
+    cursor.execute("SELECT COUNT(*) FROM books ")
+    number_of_entries = cursor.fetchone()[0]
+    if number_of_entries >= 516:
+        cursor.execute("DELETE FROM books ")
+    cursor.commit()
+
 
 
 def main() -> None:
